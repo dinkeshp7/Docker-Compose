@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client";
 import express from "express"
 
 const prismaClient = new PrismaClient();
@@ -10,7 +10,7 @@ app.use(express.json());
 app.get("/",async (req,res)=>{
 
     try{
-        const user = await prismaClient.User.findMany();
+        const user = await prismaClient.user.findMany();
         res.json({user})
     console.log(user);
     } catch (e){
@@ -20,7 +20,7 @@ app.get("/",async (req,res)=>{
 })
 
 app.post("/",async (req,res)=>{
-   try{ const user = await prismaClient.User.create({
+   try{ const user = await prismaClient.user.create({
         data : {
             username:(Math.random()*100).toString(),password:(Math.random()*100).toString()
         }
